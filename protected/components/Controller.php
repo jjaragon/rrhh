@@ -26,6 +26,8 @@ class Controller extends CController
     public function init() {
         $this->registerJs();
         $this->registerCss();
+        
+        $usuarios = SystemUsuarios::model()->findAll();
     }
 
   

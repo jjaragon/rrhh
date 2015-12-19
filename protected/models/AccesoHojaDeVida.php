@@ -51,7 +51,7 @@ class AccesoHojaDeVida extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'datosPersonalesHvs' => array(self::HAS_MANY, 'DatosPersonalesHv', 'email'),
-			'hojaDeVidas' => array(self::HAS_MANY, 'HojaDeVida', 'acceso_id'),
+			'objHojaDeVida' => array(self::BELONGS_TO, 'HojaDeVida', 'acceso_id'),
 		);
 	}
 
@@ -63,7 +63,7 @@ class AccesoHojaDeVida extends CActiveRecord
 		return array(
 			'acceso_id' => 'Acceso',
 			'correo_electronico' => 'Correo Electronico',
-			'passwd' => 'Passwd',
+			'passwd' => 'Contraseña',
 			'sw_estado' => 'Sw Estado',
 			'fecha_registro' => 'Fecha Registro',
 			'passwd_default' => 'Passwd Default',

@@ -9,6 +9,7 @@ return array(
     'name' => 'Sistema Integrado de Informacion',
     'language' => 'es',
     'sourceLanguage' => 'es', // Este es el lenguaje por defecto de los archivos 
+    'defaultController' => 'sitio',
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes
@@ -18,13 +19,21 @@ return array(
     ),
     'modules' => array(
     // uncomment the following to enable the Gii tool
-    
+    /*
+     *  'callcenter' => array(
+            'defaultController' => 'admin',
+            'components' => array(
+                'user' => array(
+                    'class' => 'callcenter.components.UserOperator',
+                ),
+            )),
+     */
       'gii'=>array(
-      'class'=>'system.gii.GiiModule',
-      'password'=>'123456',
-      // If removed, Gii defaults to localhost only. Edit carefully to taste.
-    //  'ipFilters'=>array('127.0.0.1','::1'),
-      ),
+            'class'=>'system.gii.GiiModule',
+            'password'=>'123456',
+            // If removed, Gii defaults to localhost only. Edit carefully to taste.
+          //  'ipFilters'=>array('127.0.0.1','::1'),
+            ),
      
     ),
     // application components
@@ -34,6 +43,21 @@ return array(
             'allowAutoLogin' => true,
         ),
         // uncomment the following to enable URLs in path-format
+        'session' => array(
+            'class' => 'CDbHttpSession',
+            'timeout' => 2592000//1 dia 86400 --> 30 dias,
+        ),
+        'urlManager' => array(
+            'urlFormat' => 'path',
+            'showScriptName' => false,
+            'caseSensitive' => true,
+            'rules' => array(
+                'site/page/<view:\w+>' => 'site/page/',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ),
+        ),
         /*
           'urlManager'=>array(
           'urlFormat'=>'path',
@@ -53,10 +77,10 @@ return array(
             'password' => 'root',
             'charset' => 'utf8',
         ),
-        'errorHandler' => array(
+       /* 'errorHandler' => array(
             // use 'site/error' action to display errors
-            'errorAction' => 'site/error',
-        ),
+           // 'errorAction' => 'site/error',
+        ),*/
         'log' => array(
             'class' => 'CLogRouter',
             'routes' => array(
